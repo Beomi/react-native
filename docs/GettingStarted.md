@@ -7,14 +7,17 @@ permalink: docs/getting-started.html
 next: tutorial
 ---
 
-Welcome to React Native! This page will help you install React Native on
-your system, so that you can build apps with it right away. If you already
-have React Native installed, you can skip ahead to the
-[Tutorial](/react-native/docs/tutorial.html).
+React Native에 오신 것을 환영합니다!
+이번 게시글에서는 React Native를 여러분의 시스템에 설치하고 곧바로 실행 할 수 있도록 안내합니다.
+만약 여러분이 이미 React Native를 설치해두셨다면, 이번 게시글을 건너뛰고 [튜토리얼]('/react-native/docs/tutorial.html')로 가셔도 됩니다.
 
-The instructions are a bit different depending on your development operating system, and whether you want to start developing for iOS or Android. If you
-want to develop for both iOS and Android, that's fine - you just have to pick
-one to start with, since the setup is a bit different.
+이번 게시글은 여러분이 어떤 시스템을 사용하는지에 따라 약간 내용이 다르고, iOS/Android중 어떤 것을 사용하느냐에 따라서도 내용이 다르답니다.
+iOS와 Android 모두 개발하는 것도 당연히 가능합니다! 여기서는 그냥 시작을 어떤 환경으로 할지 정하는 것 뿐입니다.
+
+```
+주의: iOS개발은 Xcode가 깔려있는 macOS(OS X)환경에서만 가능합니다.
+```
+
 
 <div class="toggler">
   <style>
