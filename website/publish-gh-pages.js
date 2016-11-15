@@ -23,8 +23,8 @@ if (!which(`git`)) {
 }
 
 let version;
-let areVersionlessSectionsToBeDeployed = false;
-  version = 'korean-stable';  
+let areVersionlessSectionsToBeDeployed = true;
+  version = 'next';  
 
 rm(`-rf`, `build`);
 mkdir(`-p`, `build`);
@@ -33,7 +33,7 @@ const currentCommit = exec(`git rev-parse HEAD`).stdout.trim();
 const latestTagCommit = exec(`git ls-remote origin latest`).stdout.split(/\s/)[0];
 // pass along which branch contains latest version so that gh-pages root could mark it as latest
 const branchWithLatestTag = exec(`git branch -r --contains ${latestTagCommit}`).stdout.split('/')[1];
-let latestVersion = `korean-stable`;
+let latestVersion = `next`;
 
   echo(`Building branch ${version}, preparing to push to gh-pages`);
   // if code is running in a branch in CI, commit changes to gh-pages branch
