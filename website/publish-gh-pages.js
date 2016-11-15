@@ -15,7 +15,7 @@ const CIRCLE_BRANCH = process.env.CIRCLE_BRANCH;
 const CIRCLE_PROJECT_USERNAME = process.env.CIRCLE_PROJECT_USERNAME;
 const CI_PULL_REQUEST = process.env.CI_PULL_REQUEST;
 const GIT_USER = process.env.GIT_USER;
-const remoteBranch = `https://${GIT_USER}@github.com/facebook/react-native.git`;
+const remoteBranch = `https://${GIT_USER}@github.com/beomi/react-native.git`;
 
 if (!which(`git`)) {
   echo(`Sorry, this script requires git`);
@@ -24,12 +24,7 @@ if (!which(`git`)) {
 
 let version;
 let areVersionlessSectionsToBeDeployed = false;
-if (CIRCLE_BRANCH.indexOf(`-stable`) !== -1) {
-  version = CIRCLE_BRANCH.slice(0, CIRCLE_BRANCH.indexOf(`-stable`));
-} else if (CIRCLE_BRANCH === `master`) {
-  version = `next`;
-  areVersionlessSectionsToBeDeployed = true;
-}
+  version = 'korean-stable';  
 
 rm(`-rf`, `build`);
 mkdir(`-p`, `build`);
@@ -38,12 +33,8 @@ const currentCommit = exec(`git rev-parse HEAD`).stdout.trim();
 const latestTagCommit = exec(`git ls-remote origin latest`).stdout.split(/\s/)[0];
 // pass along which branch contains latest version so that gh-pages root could mark it as latest
 const branchWithLatestTag = exec(`git branch -r --contains ${latestTagCommit}`).stdout.split('/')[1];
-let latestVersion = ``;
-if (branchWithLatestTag.indexOf(`-stable`) !== -1) {
-  latestVersion = branchWithLatestTag.slice(0, branchWithLatestTag.indexOf(`-stable`));
-}
+let latestVersion = `korean-stable`;
 
-if (!CI_PULL_REQUEST && CIRCLE_PROJECT_USERNAME === `facebook`) {
   echo(`Building branch ${version}, preparing to push to gh-pages`);
   // if code is running in a branch in CI, commit changes to gh-pages branch
   cd(`build`);
@@ -111,17 +102,6 @@ if (!CI_PULL_REQUEST && CIRCLE_PROJECT_USERNAME === `facebook`) {
       .map(file => `../react-native/${file}`);
     cp(`-R`, toCopy, `.`);
   }
-  // blog, showcase, support are versionless, we always build them in root file
-  if (areVersionlessSectionsToBeDeployed) {
-    echo(`------------ COPYING blog`);
-    rm(`-rf`, `blog`);
-    cp(`-R`, `../react-native/blog`, `.`);
-    echo(`------------ COPYING showcase`);
-    cp(`../react-native/showcase.html`, `.`);
-    echo(`------------ COPYING support`);
-    cp(`../react-native/support.html`, `.`);
-  }
-  if (currentCommit === latestTagCommit || version) {
     exec(`git status`);
     exec(`git add -A .`);
     if (exec(`git diff-index --quiet HEAD --`).code !== 0) {
@@ -135,6 +115,4 @@ if (!CI_PULL_REQUEST && CIRCLE_PROJECT_USERNAME === `facebook`) {
       }
     }
     echo(`------------ gh-pages updated`);
-  }
-
-}
+  
