@@ -12,9 +12,9 @@ var semverCmp = require('semver-compare');
 require(`shelljs/global`);
 
 const CIRCLE_BRANCH = process.env.CIRCLE_BRANCH;
-const CIRCLE_PROJECT_USERNAME = process.env.CIRCLE_PROJECT_USERNAME;
+const CIRCLE_PROJECT_USERNAME = 'beomi';
 const CI_PULL_REQUEST = process.env.CI_PULL_REQUEST;
-const GIT_USER = process.env.GIT_USER;
+const GIT_USER = 'beomi';
 const remoteBranch = `https://${GIT_USER}@github.com/beomi/react-native.git`;
 
 if (!which(`git`)) {
@@ -22,9 +22,9 @@ if (!which(`git`)) {
   exit(1);
 }
 
-let version;
+let version = 'master';
 let areVersionlessSectionsToBeDeployed = true;
-  version = 'next';  
+ 
 
 rm(`-rf`, `build`);
 mkdir(`-p`, `build`);
